@@ -36,7 +36,6 @@ namespace sdds {
         void printHelper(NodePtr root, std::string indent, bool last);
 
         void preorder();
-        void inorder();
         void postorder();
 
 
@@ -44,7 +43,6 @@ namespace sdds {
         NodePtr predecessor(NodePtr x);
         void leftRotate(NodePtr x);
         void rightRotate(NodePtr x);
-        void deleteNode(double data);
 
     public:
         RedBlackTree();
@@ -52,12 +50,13 @@ namespace sdds {
         std::queue<Order>* insert(double key);
         NodePtr minimum(NodePtr node);
         NodePtr maximum(NodePtr node);
-        double minValue();
+        Node * minValue();
         Node * maxValue();
         NodePtr getRoot();
+        void inorder();
         void printTree();
+        void deleteNode(double data);
     };
-
 
 }
 

@@ -3,12 +3,14 @@
 
 #include "RedBlackTree.h"
 #include "order.h"
+#define TREE_ARRAY_SIZE  5
 
 namespace sdds{
-    const int TREE_ARRAY_SIZE = 5;
 
     static RedBlackTree SellingDataTree[TREE_ARRAY_SIZE];
     static RedBlackTree BuyingDataTree[TREE_ARRAY_SIZE];
+
+    void pushDummiestToTree();
 }
 
 #endif //BACKEND_ALLTREES_H

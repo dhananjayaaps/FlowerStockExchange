@@ -19,6 +19,11 @@ namespace sdds{
         Order(std::string id, int instrument, int side, int quantity, double price);
 
         std::string m_clientOrderID{};
+
+        int getQuan();
+        std::ostream& fill(std::ostream& os) const;
+        std::ostream& newOrd(std::ostream& os) const;
+        std::ostream& pfill(std::ostream& os, int quantityRm);
     };
 }
 

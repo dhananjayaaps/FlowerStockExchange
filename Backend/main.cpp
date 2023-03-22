@@ -5,6 +5,7 @@
 
 #include "processOrder.h"
 #include "AllTrees.h"
+#include "BuyHandler.h"
 
 using namespace sdds;
 
@@ -12,6 +13,9 @@ int main() {
 
     std::cout << "Welcome to the flower Stock exchange"<< std::endl;
     std::ifstream file("order.csv");
+
+    pushDummiestToBuy();
+    pushDummiestToSell();
 
     std::string line;
 

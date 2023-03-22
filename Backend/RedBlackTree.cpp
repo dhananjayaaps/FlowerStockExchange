@@ -1,6 +1,3 @@
-//
-// Created by User on 3/21/2023.
-//
 #include "order.h"
 #include "RedBlackTree.h"
 // Implementing Red-Black Tree in C++
@@ -411,8 +408,8 @@ namespace sdds{
         }
     }
 
-    double RedBlackTree::minValue() {
-        return minimum(root)->data;
+    Node * RedBlackTree::minValue() {
+        return minimum(getRoot());
     }
 
     Node * RedBlackTree::maxValue() {

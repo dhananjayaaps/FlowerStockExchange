@@ -7,8 +7,10 @@
 
 namespace sdds{
 //    static RedBlackTree BuyingDataTree[5];
-
-    void handleBuy(const Order& newOrder, int instrument, double price);
+    void pushDummiestToBuy();
+    void handleBuy(Order& newOrder, int instrument, double price, int quantity);
+    void handleSell(Order& newOrder, int instrument, double price, int quantity);
+    void pushDummiestToSell();
 }
 
 

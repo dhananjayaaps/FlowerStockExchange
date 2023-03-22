@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <regex>
 #include "BuyHandler.h"
-#include "SellHandler.h"
 
 namespace sdds{
 
@@ -94,10 +93,10 @@ namespace sdds{
             }
             if(m_side == 1){
                 Order newBuy(clientOrderID, t_instrument, m_side, m_quantity, m_price);
-                handleBuy(newBuy, t_instrument, m_price);
+                handleBuy(newBuy, t_instrument, m_price, m_quantity);
             } else{
                 Order newSell(clientOrderID, t_instrument, m_side, m_quantity, m_price);
-                handleSell(newSell, t_instrument, m_price);
+                handleSell(newSell, t_instrument, m_price, m_quantity);
             }
         }
         catch (const std::exception& e) {

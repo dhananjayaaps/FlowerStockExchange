@@ -3,4 +3,4 @@ project(Backend)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Backend main.cpp processOrder.cpp order.cpp RedBlackTree.h SellHandler.cpp BuyHandler.cpp RedBlackTree.cpp)
+add_executable(Backend main.cpp processOrder.cpp order.cpp RedBlackTree.h BuyHandler.cpp RedBlackTree.cpp)
