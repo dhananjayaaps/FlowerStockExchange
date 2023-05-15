@@ -5,8 +5,10 @@
 #include <cstring>
 
 namespace sdds{
+
     class Order {
 
+        char instrumentName[5][9] = {"Rose", "Lavender" , "Lotus" , "Tulip" ,"Orchid" };
 
         Order();
 
@@ -21,9 +23,10 @@ namespace sdds{
         std::string m_clientOrderID{};
 
         int getQuan();
-        std::ostream& fill(std::ostream& os) const;
+        std::ostream& fill(std::ostream& os, double) const;
         std::ostream& newOrd(std::ostream& os) const;
-        std::ostream& pfill(std::ostream& os, int quantityRm);
+        std::ostream& pfill(std::ostream& os, int quantityRm, double);
+        void setQuantity(int quantity);
     };
 }
 

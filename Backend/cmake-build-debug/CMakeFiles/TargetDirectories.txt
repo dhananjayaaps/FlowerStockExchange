@@ -1,3 +1,3 @@
-E:/assignments/LSEG/Backend/cmake-build-debug/CMakeFiles/Backend.dir
-E:/assignments/LSEG/Backend/cmake-build-debug/CMakeFiles/edit_cache.dir
-E:/assignments/LSEG/Backend/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+E:/LSEG project/FlowerStockExchange/Backend/cmake-build-debug/CMakeFiles/Backend.dir
+E:/LSEG project/FlowerStockExchange/Backend/cmake-build-debug/CMakeFiles/edit_cache.dir
+E:/LSEG project/FlowerStockExchange/Backend/cmake-build-debug/CMakeFiles/rebuild_cache.dir

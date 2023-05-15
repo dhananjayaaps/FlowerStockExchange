@@ -1,6 +1,8 @@
 #include "order.h"
 
 #include <utility>
+#include <chrono>
+#include <iomanip>
 
 namespace sdds{
 
@@ -24,35 +26,76 @@ namespace sdds{
         return m_quantity;
     }
 
-    std::ostream &Order::fill(std::ostream &os) const {
+    std::ostream &Order::fill(std::ostream &os, double price) const {
         os<<m_clientOrderID<<",";
-        os<<m_instrument<<",";
+        os<<instrumentName[m_instrument]<<",";
         os<<m_side<<",";
         os<<"Fill"<<",";
         os<<m_quantity<<",";
-        os<<m_price;
+        os<<price <<",";
+
+        // Get current system time with milliseconds
+        auto now = std::chrono::system_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
+        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+
+        // Convert to local time
+        std::tm local_time = *std::localtime(&now_c);
+
+        // Format time as string and append to output stream
+        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
+        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+
         return os;
     }
 
     std::ostream &Order::newOrd(std::ostream &os) const {
         os<<m_clientOrderID<<",";
-        os<<m_instrument<<",";
+        os<<instrumentName[m_instrument]<<",";
         os<<m_side<<",";
         os<<"New"<<",";
         os<<m_quantity<<",";
-        os<<m_price;
+        os<<m_price <<",";
+
+        // Get current system time with milliseconds
+        auto now = std::chrono::system_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
+        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+
+        // Convert to local time
+        std::tm local_time = *std::localtime(&now_c);
+
+        // Format time as string and append to output stream
+        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
+        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
         return os;
     }
 
-    std::ostream &Order::pfill(std::ostream &os, int quantityRm) {
+    std::ostream &Order::pfill(std::ostream &os, int quantityRm, double price) {
         m_quantity -= quantityRm;
         os<<m_clientOrderID<<",";
-        os<<m_instrument<<",";
+        os<<instrumentName[m_instrument]<<",";
         os<<m_side<<",";
-        os<<"New"<<",";
+        os<<"pfill"<<",";
         os<<quantityRm<<",";
-        os<<m_price;
+        os<<price << ",";
+
+        // Get current system time with milliseconds
+        auto now = std::chrono::system_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
+        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+
+        // Convert to local time
+        std::tm local_time = *std::localtime(&now_c);
+
+        // Format time as string and append to output stream
+        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
+        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
         return os;;
+    }
+
+    void Order:: setQuantity(int quantity){
+        m_quantity = quantity;
     }
 
 }

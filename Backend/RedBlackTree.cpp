@@ -143,7 +143,7 @@ namespace sdds{
         }
 
         if (z == TNULL) {
-            cout << "Key not found in the tree" << endl;
+            //cout << "Key not found in the tree :" << key<<endl;
             return;
         }
 

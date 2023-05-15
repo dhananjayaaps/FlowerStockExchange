@@ -8,10 +8,9 @@
 namespace sdds{
 //    static RedBlackTree BuyingDataTree[5];
     void pushDummiestToBuy();
-    void handleBuy(Order& newOrder, int instrument, double price, int quantity);
-    void handleSell(Order& newOrder, int instrument, double price, int quantity);
+    void handleBuy(Order& newOrder, int instrument, double price, int quantity, std::ostringstream &os);
+    void handleSell(Order& newOrder, int instrument, double price, int quantity, std::ostringstream &os);
     void pushDummiestToSell();
 }
-
 
 #endif //BACKEND_BUYHANDLER_H

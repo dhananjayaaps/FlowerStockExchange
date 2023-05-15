@@ -3,6 +3,7 @@
 
 #include "RedBlackTree.h"
 #include "order.h"
+
 #define TREE_ARRAY_SIZE  5
 
 namespace sdds{
@@ -11,6 +12,7 @@ namespace sdds{
     static RedBlackTree BuyingDataTree[TREE_ARRAY_SIZE];
 
     void pushDummiestToTree();
+
 }
 
 #endif //BACKEND_ALLTREES_H
