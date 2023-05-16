@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <cstring>
+#include <vector>
+#include "count.h"
 
 namespace sdds{
 
@@ -11,7 +13,7 @@ namespace sdds{
         char instrumentName[5][9] = {"Rose", "Lavender" , "Lotus" , "Tulip" ,"Orchid" };
 
         Order();
-
+        int m_orderId{};
         int m_instrument{};
         int m_side{};
         int m_quantity{};
@@ -23,9 +25,9 @@ namespace sdds{
         std::string m_clientOrderID{};
 
         int getQuan();
-        std::ostream& fill(std::ostream& os, double) const;
-        std::ostream& newOrd(std::ostream& os) const;
-        std::ostream& pfill(std::ostream& os, int quantityRm, double);
+        void fill(std::vector<std::string> &resp, double) const;
+        void newOrd(std::vector<std::string> &resp) const;
+        void pfill(std::vector<std::string> &resp, int quantityRm, double);
         void setQuantity(int quantity);
     };
 }

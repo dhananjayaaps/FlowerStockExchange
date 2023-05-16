@@ -7,7 +7,6 @@
 #define TREE_ARRAY_SIZE  5
 
 namespace sdds{
-
     static RedBlackTree SellingDataTree[TREE_ARRAY_SIZE];
     static RedBlackTree BuyingDataTree[TREE_ARRAY_SIZE];
 

@@ -31,10 +31,10 @@ namespace sdds{
     }
 
     // process each input from user
-    void processOrder(const std::string &clientOrderID, std::string instrument, std::string side, std::string quantity,
-                      std::string price, std::ostringstream &os) {
+    void processOrder(const std::string& clientOrderID,const std::string& instrument,const std::string& side,const std::string& quantity,const std::string& price,std::vector<std::string>& data){
 
-        int m_side, m_quantity;
+
+    int m_side, m_quantity;
         double m_price;
 
         // Convert side, quantity, and price to integers
@@ -118,10 +118,10 @@ namespace sdds{
 
             if(m_side == 1){
                 Order newBuy(clientOrderID, t_instrument, m_side, m_quantity, m_price);
-                handleBuy(newBuy, t_instrument, m_price, m_quantity, os);
+                handleBuy(newBuy, t_instrument, m_price, m_quantity, data);
             } else{
                 Order newSell(clientOrderID, t_instrument, m_side, m_quantity, m_price);
-                handleSell(newSell, t_instrument, m_price, m_quantity, os);
+                handleSell(newSell, t_instrument, m_price, m_quantity, data);
             }
         }
         catch (const std::exception& e) {

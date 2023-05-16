@@ -1,7 +1,7 @@
 #include "BuyHandler.h"
-#include <ostream>
 #include <sstream>
 #include <limits>
+#include <iostream>
 
 namespace sdds {
 
@@ -17,8 +17,8 @@ namespace sdds {
 
     // That codes are used for handle Sell requests without any errors
 
-    void handleSell(Order &newOrder, int instrument, double price, int quantity, std::ostringstream &os) {
-//        std::ostringstream os;
+    void handleSell(Order &newOrder, int instrument, double price, int quantity, std::vector<std::string> &resp) {
+//        std::resptringstream resp;
 
         //Get the maximum Buying Order
         Node* buyMax = BuyingDataTree[instrument].maxValue();
@@ -28,8 +28,7 @@ namespace sdds {
 
             std::queue<Order> *pQueue = SellingDataTree[instrument].insert(price);
             pQueue->push(newOrder);
-            newOrder.newOrd(os);
-            os<<std::endl;
+            newOrder.newOrd(resp);
         } else{
 
             //for handle
@@ -41,10 +40,8 @@ namespace sdds {
                 // getting the maximum buying request
 
                 if(availQuantity == quantity){
-                    newOrder.fill(os, buyMax->data);
-                    os<<std::endl;
-                    buyMax->orderQueue.front().fill(os, buyMax->data);
-                    os<<std::endl;
+                    newOrder.fill(resp, buyMax->data);
+                    buyMax->orderQueue.front().fill(resp, buyMax->data);
                     buyMax->orderQueue.pop();
                     if(buyMax->orderQueue.empty()){
                         BuyingDataTree[instrument].deleteNode(buyMax->data);
@@ -53,20 +50,16 @@ namespace sdds {
                     break;
 
                 } else if (quantity < availQuantity){
-                    newOrder.fill(os, buyMax->data);
-                    os << std::endl;
-                    buyMax->orderQueue.front().pfill(os, quantity, buyMax->data);
-                    os << std::endl;
+                    newOrder.fill(resp, buyMax->data);
+                    buyMax->orderQueue.front().pfill(resp, quantity, buyMax->data);
                     quantity = 0;
                     break;
 
                 } else{
                     quantity -= availQuantity;
-                    newOrder.pfill(os, availQuantity, buyMax->data);
-                    os << std::endl;
-                    buyMax->orderQueue.front().fill(os, buyMax->data);
+                    newOrder.pfill(resp, availQuantity, buyMax->data);
+                    buyMax->orderQueue.front().fill(resp, buyMax->data);
                     buyMax->orderQueue.pop();
-                    os << std::endl;
                     if(buyMax->orderQueue.empty()){
                         BuyingDataTree[instrument].deleteNode(buyMax->data);
                     }
@@ -83,7 +76,7 @@ namespace sdds {
             }
 
         }
-//        std::cout << os.str();
+//        std::cout << resp.str();
 
     }
 
@@ -100,16 +93,15 @@ namespace sdds {
 
     // That codes are used for handle Buy requests without any errors
 
-    void handleBuy(Order& newOrder, int instrument, double price, int quantity, std::ostringstream &os) {
-       // std::ostringstream os;
+    void handleBuy(Order& newOrder, int instrument, double price, int quantity, std::vector<std::string> &resp) {
+       // std::resptringstream resp;
         //Get the minimum price selling Order
         Node* SellMin = SellingDataTree[instrument].minValue();
         //If it higher than the Buyer order Price, It add to the tree without executing
         if(SellMin->data > price) {
             std::queue<Order> *pQueue = BuyingDataTree[instrument].insert(price);
             pQueue->push(newOrder);
-            newOrder.newOrd(os);
-            os << std::endl;
+            newOrder.newOrd(resp);
         } else{
             //for handle
             int StartQuantity = quantity;
@@ -120,10 +112,8 @@ namespace sdds {
                 // getting the maximum buying request
 
                 if(availQuantity == quantity){
-                    newOrder.fill(os, SellMin->data);
-                    os<<std::endl;
-                    SellMin->orderQueue.front().fill(os, SellMin->data);
-                    os<<std::endl;
+                    newOrder.fill(resp, SellMin->data);
+                    SellMin->orderQueue.front().fill(resp, SellMin->data);
                     SellMin->orderQueue.pop();
                     if(SellMin->orderQueue.empty()){
                         SellingDataTree[instrument].deleteNode(SellMin->data);
@@ -132,20 +122,16 @@ namespace sdds {
                     break;
 
                 } else if (quantity < availQuantity){
-                    newOrder.fill(os, SellMin->data);
-                    os << std::endl;
-                    SellMin->orderQueue.front().pfill(os, quantity, SellMin->data);
-                    os << std::endl;
+                    newOrder.fill(resp, SellMin->data);
+                    SellMin->orderQueue.front().pfill(resp, quantity, SellMin->data);
                     quantity = 0;
                     break;
 
                 } else{
                     quantity -= availQuantity;
-                    newOrder.pfill(os, availQuantity, SellMin->data);
-                    os << std::endl;
-                    SellMin->orderQueue.front().fill(os, SellMin->data);
+                    newOrder.pfill(resp, availQuantity, SellMin->data);
+                    SellMin->orderQueue.front().fill(resp, SellMin->data);
                     SellMin->orderQueue.pop();
-                    os << std::endl;
                     if(SellMin->orderQueue.empty()){
                         SellingDataTree[instrument].deleteNode(SellMin->data);
                     }
@@ -162,6 +148,6 @@ namespace sdds {
             }
 
         }
-//        std::cout << os.str();
+//        std::cout << resp.str();
     }
 }
