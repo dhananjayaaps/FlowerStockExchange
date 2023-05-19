@@ -50,7 +50,7 @@ namespace sdds{
         // Format time as string and append to output stream
         os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
         os << '.' << std::setfill('0') << std::setw(3) << ms.count();
-
+        os<<",";
         resp.push_back(os.str());
     }
 
@@ -76,6 +76,7 @@ namespace sdds{
         // Format time as string and append to output stream
         os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
         os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        os<<",";
         resp.push_back(os.str());
     }
 
@@ -101,6 +102,7 @@ namespace sdds{
         // Format time as string and append to output stream
         os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
         os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        os<<",";
         resp.push_back(os.str());
     }
 

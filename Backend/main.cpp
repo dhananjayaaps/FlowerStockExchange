@@ -15,19 +15,10 @@
 
 using namespace sdds;
 
-bool validateInput(const rapidjson::Value& json_data, const std::vector<std::string>& fields) {
-    for (const auto& field : fields) {
-        if (!json_data.HasMember(field.c_str()) || !json_data[field.c_str()].IsString()) {
-            return false;
-        }
-    }
-    return true;
-}
-
 int main() {
     auto start_time = std::chrono::high_resolution_clock::now();
 
-    std::cout << "Welcome to the flower Stock exchange" << std::endl;
+    std::cout << "Welcome to the flower Stock exchange"<< std::endl;
     pushDummiestToBuy();
     pushDummiestToSell();
     orderID = 0;
@@ -44,48 +35,54 @@ int main() {
     served::multiplexer mux;
 
     mux.handle("/api/order/new")
-            .post([&](served::response &res, const served::request &req) {
-                try {
-                    // Parse request body to extract necessary data
-                    std::string body = req.body();
-                    rapidjson::Document json_data;
-                    json_data.Parse(body.c_str());
+    .post([&](served::response &res, const served::request &req) {
+        try {
+            std::string body = req.body();
+            rapidjson::Document json_data;
+            json_data.Parse(body.c_str());
 
-                    std::vector<std::string> required_fields = {"Client_ID", "Instrument", "Side", "Quantity", "Price"};
-                    if (!validateInput(json_data, required_fields)) {
-                        throw std::runtime_error("Missing or invalid fields in the request.");
-                    }
+            // Check if JSON parsing was successful
+            if (json_data.HasParseError()) {
+                throw std::runtime_error("Invalid JSON format in the request.");
+            }
 
-                    std::string Client_ord_ID = json_data["Client_ID"].GetString();
-                    std::string Instrument = json_data["Instrument"].GetString();
-                    std::string side = json_data["Side"].GetString();
-                    std::string quantity = json_data["Quantity"].GetString();
-                    std::string price = json_data["Price"].GetString();
+            // Validate required fields
+            if (!json_data.IsObject() || !json_data.HasMember("Client_ID") ||
+                !json_data.HasMember("Instrument") || !json_data.HasMember("Side") ||
+                !json_data.HasMember("Quantity") || !json_data.HasMember("Price")) {
+                throw std::runtime_error("Invalid request format or missing required fields.");
+            }
 
-                    // Add the new order to the data vector
-                    std::vector<std::string> data;
-                    processOrder(Client_ord_ID, Instrument, side, quantity, price, data);
+            // Parse request body to extract necessary data
+            json_data.Parse(body.c_str());
+            std::string Client_ord_ID = json_data["Client_ID"].GetString();
+            std::string Instrument = json_data["Instrument"].GetString();
+            std::string side = json_data["Side"].GetString();
+            std::string quantity = json_data["Quantity"].GetString();
+            std::string price = json_data["Price"].GetString();
 
-                    rapidjson::Document response_data(rapidjson::kArrayType);
-                    for (const auto &row : data) {
-                        response_data.PushBack(rapidjson::StringRef(row.c_str()), response_data.GetAllocator());
-                    }
+            // Add the new order to the data vector
+            std::vector<std::string> data;
+            processOrder(Client_ord_ID, Instrument, side, quantity, price, data);
 
-                    // Send the updated data as the response body
-                    rapidjson::StringBuffer buffer;
-                    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-                    response_data.Accept(writer);
-                    res.set_header("content-type", "application/json");
-                    res << buffer.GetString();
+            rapidjson::Document response_data(rapidjson::kArrayType);
+            for (const auto &row : data) {
+                response_data.PushBack(rapidjson::StringRef(row.c_str()), response_data.GetAllocator());
+            }
 
-
-                } catch (const std::exception &e) {
-                    // Send a bad response if an error occurs
-                    res.set_status(400);
-                    res.set_header("content-type", "application/json");
-                    res << "{ \"error\": \"" << e.what() << "\" }";
-                }
-            });
+            // Send the updated data as the response body
+            rapidjson::StringBuffer buffer;
+            rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+            response_data.Accept(writer);
+            res.set_header("content-type", "application/json");
+            res << buffer.GetString();
+        } catch (const std::exception &e) {
+            // Send a bad response if an error occurs
+            res.set_status(400);
+            res.set_header("content-type", "application/json");
+            res << "{ \"error\": \"" << e.what() << "\" }";
+        }
+    });
 
 
     std::cout << "Try this example with:" << std::endl;

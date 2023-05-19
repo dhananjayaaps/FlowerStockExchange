@@ -2,9 +2,39 @@
 #include <iostream>
 #include <algorithm>
 #include <regex>
+#include <chrono>
+#include <iomanip>
 #include "BuyHandler.h"
 
 namespace sdds{
+
+    void raiseError(const std::string &Client_ID, const std::string &Instrument, const std::string &side,
+                          const std::string &quantity, const std::string &price, const std::exception& e, std::vector<std::string> &resp) {
+        std::stringstream os;
+        os << ++orderID << ",";
+        os<<Client_ID<<",";
+        os<<Instrument<<",";
+        os<<side<<",";
+        os<<"Rejected"<<",";
+        os<<quantity<<",";
+        os<<price <<",";
+
+        // Get current system time with milliseconds
+        auto now = std::chrono::system_clock::now();
+        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
+        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+
+        // Convert to local time
+        std::tm local_time = *std::localtime(&now_c);
+
+        // Format time as string and append to output stream
+        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
+        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        os << ",";
+        os << e.what();
+        resp.push_back(os.str());
+    }
+
 
     bool isDouble(const std::string& str) {
         int dotCount = 0;
@@ -125,10 +155,9 @@ namespace sdds{
             }
         }
         catch (const std::exception& e) {
-            // Handle the error
-            std::cerr << e.what() << std::endl;
+
+            raiseError(clientOrderID, instrument,side,quantity,price,e,data);
         }
 
     }
-
 }
