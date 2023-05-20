@@ -1,9 +1,0 @@
-# ninja log v5
-15	1211	7011681835361181	CMakeFiles/Backend.dir/main.cpp.obj	7a3f1ce5f50b7a8e
-23	637	7011563348186466	CMakeFiles/Backend.dir/SellHandler.cpp.obj	baf3083b911eb685
-4376	6588	7011681889097104	Backend.exe	e5edf852745ddd5b
-54	1249	7011681835791092	CMakeFiles/Backend.dir/BuyHandler.cpp.obj	a652110dbe662649
-33	4376	7011681866942725	CMakeFiles/Backend.dir/processOrder.cpp.obj	51f040028db2b042
-7	473	7011563346541280	CMakeFiles/Backend.dir/order.cpp.obj	6d166c01fd17791b
-44	1571	7011681838992835	CMakeFiles/Backend.dir/RedBlackTree.cpp.obj	99f6304f87b6f664
-7	597	7011779463270641	build.ninja	5e22f2e6112de073
