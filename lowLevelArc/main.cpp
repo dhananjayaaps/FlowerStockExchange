@@ -70,9 +70,7 @@ int main() {
     } else {
         std::cerr << "Unable to open file." << std::endl;
     }
-//    processOrder("aa13","Rose","1","100","55");
-//    processOrder("aa14","Rose","1","100","65");
-//    processOrder("aa15","Rose","2","300","1");
+
     auto end_time = std::chrono::high_resolution_clock::now();
     auto time_diff = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
 
