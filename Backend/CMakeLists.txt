@@ -6,12 +6,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 project(Backend)
 
-add_executable(Backend main.cpp ValidateOrder.cpp order.cpp RedBlackTree.h BuyHandler.cpp RedBlackTree.cpp order.csv Cache.cpp Cache.h Cache.h count.h)
-
+add_executable(Backend main.cpp ValidateOrder.cpp order.cpp RedBlackTree.h HandlerLogic.cpp RedBlackTree.cpp order.csv Cache.cpp Cache.h Cache.h count.h handleOrder.cpp handleOrder.h)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SERVED_PKG REQUIRED IMPORTED_TARGET served)
 
+set(MYSQLCPPCONN_INCLUDE_DIR "/path/to/mysqlcppconn/include")
+set(MYSQLCPPCONN_LIB_DIR "/path/to/mysqlcppconn/lib")
 
-target_link_libraries(Backend PkgConfig::SERVED_PKG)
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
+find_package(OpenSSL REQUIRED)
+
+include_directories(${MYSQLCPPCONN_INCLUDE_DIR})
+
+target_link_libraries(Backend PRIVATE OpenSSL::Crypto mysqlcppconn PkgConfig::SERVED_PKG)
+
+link_directories(${MYSQLCPPCONN_LIB_DIR})
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+target_link_libraries(Backend PRIVATE Threads::Threads)

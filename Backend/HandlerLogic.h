@@ -1,5 +1,5 @@
-#ifndef BACKEND_BUYHANDLER_H
-#define BACKEND_BUYHANDLER_H
+#ifndef BACKEND_HANDLERLOGIC_H
+#define BACKEND_HANDLERLOGIC_H
 #include "AllTrees.h"
 #include "order.h"
 #include "RedBlackTree.h"
@@ -14,4 +14,4 @@ namespace sdds{
 
 }
 
-#endif //BACKEND_BUYHANDLER_H
+#endif //BACKEND_HANDLERLOGIC_H
