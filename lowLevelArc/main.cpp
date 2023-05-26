@@ -7,6 +7,7 @@
 #include "ValidateOrder.h"
 #include "AllTrees.h"
 #include "BuyHandler.h"
+#include "Cache.h"
 
 using namespace sdds;
 
@@ -18,6 +19,8 @@ int main() {
 
     pushDummiestToBuy();
     pushDummiestToSell();
+
+    orderId = 0;
 
     std::string line;
 

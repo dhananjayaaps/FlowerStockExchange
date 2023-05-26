@@ -1,9 +1,9 @@
 ﻿Client Order ID,Instrument,Side,Quantity,Price
 aa13,Rose,2,100,55
-aa14,Rose,1,100,12
+aa14,Rose,1,100,12p
 aa15,Rose,2,100,45
 aa16,Rose,1,200,4
-aa17,Rose,2,100,15
+aa17,Royse,2,100,15
 aa18,Rose,2,100,65
 aa19,Rose,1,100,1
 aa20,Rose,1,200,67
@@ -1047,7 +1047,7 @@ aa16,Rose,1,200,4
 aa17,Rose,2,100,15
 aa18,Rose,2,100,65
 aa19,Rose,1,100,1
-aa20,Rose,1,200,67
+aa20,Rose,1,200,67k
 aa22,Rose,1,300,20
 aa23,Rose,2,300,35
 aa24,Rose,1,300,100

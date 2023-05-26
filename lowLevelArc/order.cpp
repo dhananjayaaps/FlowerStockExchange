@@ -1,5 +1,5 @@
 #include "order.h"
-
+#include "Cache.h"
 #include <utility>
 #include <chrono>
 #include <iomanip>
@@ -15,6 +15,7 @@ namespace sdds{
     }
 
     Order::Order(std::string id, int instrument, int side, int quantity, double price) {
+        orderId ++;
         m_clientOrderID = std::move(id);
         m_instrument = instrument;
         m_side = side;
@@ -27,6 +28,7 @@ namespace sdds{
     }
 
     std::ostream &Order::fill(std::ostream &os, double price) const {
+        os<<orderId<<",";
         os<<m_clientOrderID<<",";
         os<<instrumentName[m_instrument]<<",";
         os<<m_side<<",";
@@ -50,6 +52,7 @@ namespace sdds{
     }
 
     std::ostream &Order::newOrd(std::ostream &os) const {
+        os<<orderId<<",";
         os<<m_clientOrderID<<",";
         os<<instrumentName[m_instrument]<<",";
         os<<m_side<<",";
@@ -72,6 +75,7 @@ namespace sdds{
     }
 
     std::ostream &Order::pfill(std::ostream &os, int quantityRm, double price) {
+        os<<orderId<<",";
         m_quantity -= quantityRm;
         os<<m_clientOrderID<<",";
         os<<instrumentName[m_instrument]<<",";
