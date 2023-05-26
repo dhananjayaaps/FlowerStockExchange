@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 project(Backend)
 
-add_executable(Backend main.cpp ValidateOrder.cpp order.cpp RedBlackTree.h HandlerLogic.cpp RedBlackTree.cpp order.csv Cache.cpp Cache.h Cache.h count.h handleOrder.cpp handleOrder.h)
+add_executable(Backend main.cpp ValidateOrder.cpp order.cpp RedBlackTree.h HandlerLogic.cpp RedBlackTree.cpp order.csv Cache.cpp Cache.h Cache.h count.h handleOrder.cpp handleOrder.h getHistory.cpp getHistory.h)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SERVED_PKG REQUIRED IMPORTED_TARGET served)

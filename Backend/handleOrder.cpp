@@ -8,6 +8,57 @@
 #include <vector>
 #include "ValidateOrder.h"
 
+void saveOrder(const std::vector<std::string>& orderData, const std::string& userId)
+{
+    try {
+        // Database connection setup
+        sql::mysql::MySQL_Driver* driver;
+        sql::Connection* con;
+        driver = sql::mysql::get_mysql_driver_instance();
+        con = driver->connect(DB_HOST, DB_USER, DB_PASSWORD);
+        con->setSchema(DB_NAME);
+
+        // Prepare the SQL statement for inserting the order into the database
+        std::string insertSql = "INSERT INTO orders VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        sql::PreparedStatement* pstmt = con->prepareStatement(insertSql);
+
+        // Iterate over the order data and bind the values to the prepared statement
+        for (const auto& row : orderData) {
+            // Split the row into individual values
+            std::vector<std::string> values;
+            std::istringstream iss(row);
+            std::string value;
+            while (std::getline(iss, value, ',')) {
+                values.push_back(value);
+            }
+
+            // Check if the row has the expected number of fields
+            if (values.size() == 8) {
+                values.emplace_back("  ");
+            }
+
+            // Bind the values to the prepared statement
+            for (int i = 0; i < 9; ++i) {
+                pstmt->setString(i + 1, values[i]);
+            }
+            // Set the userId
+            pstmt->setString(10, userId);
+
+            // Execute the prepared statement to insert the order into the database
+            pstmt->execute();
+        }
+
+        // Clean up prepared statement and connection
+        delete pstmt;
+        delete con;
+    } catch (const std::exception& e) {
+        // Handle the error
+        std::cerr << "Failed to save order: " << e.what() << std::endl;
+    }
+}
+
+
+
 bool validateToken(const std::string& token, const std::string& userId, served::response &res){
     // Database connection setup
     sql::mysql::MySQL_Driver *driver;
@@ -39,10 +90,10 @@ bool validateToken(const std::string& token, const std::string& userId, served::
         }
     } else {
         // user not found
-        res.set_status(404);
+        res.set_status(401);
         return false;
     }
-};
+}
 
 void newOrder(served::response &res, const served::request &req){
     try {
@@ -118,12 +169,13 @@ void newOrder(served::response &res, const served::request &req){
 
 // Add the new order to the data vector
             std::vector<std::string> data;
-            sdds::processOrder(Client_ord_ID, Instrument, side, quantity, price, data);
+            sdds::processOrder(Client_ord_ID, Instrument, side, quantity, price, data, userID);
 
             rapidjson::Document response_data(rapidjson::kArrayType);
             for (const auto &row : data) {
                 response_data.PushBack(rapidjson::StringRef(row.c_str()), response_data.GetAllocator());
             }
+            saveOrder(data, userID);
 
 // Send the updated data as the response body
             rapidjson::StringBuffer buffer;

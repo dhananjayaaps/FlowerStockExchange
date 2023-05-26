@@ -9,7 +9,7 @@
 namespace sdds{
 
     void raiseError(const std::string &Client_ID, const std::string &Instrument, const std::string &side,
-                          const std::string &quantity, const std::string &price, const std::exception& e, std::vector<std::string> &resp) {
+                          const std::string &quantity, const std::string &price, const std::exception& e, std::vector<std::string> &resp, const std::string& userId) {
         std::stringstream os;
         os << ++orderID << ",";
         os<<Client_ID<<",";
@@ -61,7 +61,7 @@ namespace sdds{
     }
 
     // process each input from user
-    void processOrder(const std::string& clientOrderID,const std::string& instrument,const std::string& side,const std::string& quantity,const std::string& price,std::vector<std::string>& data){
+    void processOrder(const std::string& clientOrderID,const std::string& instrument,const std::string& side,const std::string& quantity,const std::string& price,std::vector<std::string>& data, const std::string& userId){
 
 
     int m_side, m_quantity;
@@ -146,17 +146,19 @@ namespace sdds{
                 throw std::invalid_argument("Invalid price.");
             }
 
+            int id = std::stoi(userId);
+
             if(m_side == 1){
-                Order newBuy(clientOrderID, t_instrument, m_side, m_quantity, m_price);
+                Order newBuy(clientOrderID, t_instrument, m_side, m_quantity, m_price, id);
                 handleBuy(newBuy, t_instrument, m_price, m_quantity, data);
             } else{
-                Order newSell(clientOrderID, t_instrument, m_side, m_quantity, m_price);
+                Order newSell(clientOrderID, t_instrument, m_side, m_quantity, m_price, id);
                 handleSell(newSell, t_instrument, m_price, m_quantity, data);
             }
         }
         catch (const std::exception& e) {
 
-            raiseError(clientOrderID, instrument,side,quantity,price,e,data);
+            raiseError(clientOrderID, instrument,side,quantity,price,e,data, userId);
         }
 
     }

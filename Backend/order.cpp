@@ -16,13 +16,14 @@ namespace sdds{
         m_price = 0;
     }
 
-    Order::Order(std::string id, int instrument, int side, int quantity, double price) {
+    Order::Order(std::string id, int instrument, int side, int quantity, double price, int uid) {
         m_orderId = ++orderID;
         m_clientOrderID = std::move(id);
         m_instrument = instrument;
         m_side = side;
         m_quantity = quantity;
         m_price = price;
+        userId = uid;
     }
 
     int Order::getQuan(){

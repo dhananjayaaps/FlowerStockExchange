@@ -18,9 +18,10 @@ namespace sdds{
         int m_side{};
         int m_quantity{};
         double m_price{};
+        int userId{};
 
     public:
-        Order(std::string id, int instrument, int side, int quantity, double price);
+        Order(std::string id, int instrument, int side, int quantity, double price, int userId);
 
         std::string m_clientOrderID{};
 
