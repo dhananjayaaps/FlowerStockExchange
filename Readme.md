@@ -1,4 +1,10 @@
-# That Project is done by
+# Flower Stock Exchange with C++
+
+>That is prototype a stock market application.
+> That is implemented using a red black tree and endpoints with boost asio and 
+> served libraries.
+
+### That Project is done by
 
 >> 1. Sineth Dhananjay
 >> 2. Isuru Liyanage
@@ -39,7 +45,6 @@ g++ -g main.cpp order.cpp RedBlackTree.cpp ValidateOrder.cpp BuyHandler.cpp Cach
 ./out
 ```
 
-- Then you can see the output in 'execution_rep.csv'
 
 
 # High Level Architecture
@@ -101,6 +106,27 @@ make
 
 > More Information about our API , Use our postman link.
 > 
+> 
 > [Postman Link](https://www.postman.com/martian-eclipse-984811/workspace/lseg-project/collection/26088144-bfb9b26e-9364-4ed5-9cf7-5532f8bfa04a?action=share&creator=26088144)
 
+###
+If you haven't dependencies, You need to install them before the running program.
+You can install them using my bash code
+```bash
+chmod +x dependencies.sh
+./dependencies.sh
+```
+
+- If you can't bind port change port in main.cpp
+- As well as you need to select your IP as public ip in main.cpp
+- Also you can use http://localhost for application
+
+>I am highly recommend linux for do this.
+>If you need to run that in windows, you can use visual studio and add that libraries
+
+### GUI
+
+* We had made that using QT. If you need to modify or test this, Install the QT software
+* It is available in branch 'gui'
+> [Qt website](https://www.qt.io/)
 
