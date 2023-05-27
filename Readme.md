@@ -39,6 +39,7 @@ g++ -g main.cpp order.cpp RedBlackTree.cpp ValidateOrder.cpp BuyHandler.cpp Cach
 ./out
 ```
 
+- Then you can see the output in 'execution_rep.csv'
 
 
 # High Level Architecture
