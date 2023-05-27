@@ -1,18 +1,29 @@
-/* Customize the horizontal header */
-QTableWidget QHeaderView::section:horizontal {
-    background-color: #333;
+QPushButton {
+    background-color: #4a90e2;
+    border: none;
     color: white;
     padding: 8px;
     font-weight: bold;
-    font-size: 12px;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-QTableWidget QTableCornerButton::section,
-QTableWidget::item {
-    background-color: #fff; /* Set the background color for all items */
+QPushButton:hover {
+    background-color: #3773c9;
+    border-radius: 5px;
+    color: #fff;
 }
 
-QTableWidget::item:nth-child(even){
-    background-color: #55b2b5;
+QPushButton:pressed {
+    background-color: #f5316f;
+    color: #fff;
 }
 
+QPushButton:hover, QPushButton:pressed {
+    animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.05); }
+}

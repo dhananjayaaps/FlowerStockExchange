@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>480</width>
-    <height>640</height>
+    <height>708</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,94 +16,52 @@
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
-  <widget class="QGraphicsView" name="graphicsView">
+  <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>-10</x>
-     <y>-10</y>
-     <width>511</width>
-     <height>661</height>
+     <x>120</x>
+     <y>470</y>
+     <width>241</width>
+     <height>61</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Futura Md BT</family>
+     <pointsize>18</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="autoFillBackground">
-    <bool>true</bool>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background:#34c952 ;
-           </string>
-   </property>
-   <property name="verticalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="horizontalScrollBarPolicy">
-    <enum>Qt::ScrollBarAlwaysOff</enum>
-   </property>
-   <property name="backgroundBrush">
-    <brush brushstyle="Dense1Pattern">
-     <color alpha="225">
-      <red>255</red>
-      <green>0</green>
-      <blue>127</blue>
-     </color>
-    </brush>
-   </property>
-   <property name="foregroundBrush">
-    <brush brushstyle="SolidPattern">
-     <color alpha="255">
-      <red>255</red>
-      <green>85</green>
-      <blue>255</blue>
-     </color>
-    </brush>
-   </property>
-   <property name="interactive">
     <bool>false</bool>
    </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>440</y>
-     <width>111</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Titillium Web</family>
-     <pointsize>13</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>LSEG</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>20</y>
-     <width>371</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Open Sans Semibold</family>
-     <pointsize>24</pointsize>
-     <bold>true</bold>
-    </font>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #365aa1;
+   border-radius: 15px;
+    color: white;
+    padding: 8px;
+    font-weight: bold;
+    text-align: center;
+    
+}
+
+QPushButton:hover {
+    background-color: #203661;
+    border-radius: 15px;
+    color: #fff;
+}
+
+QPushButton:pressed {
+    background-color: #3773c9;
+    color: #fff;
+}</string>
    </property>
    <property name="text">
-    <string>Flower Stock Exchange</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
+    <string>Get Started</string>
    </property>
   </widget>
  </widget>

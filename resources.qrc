@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/new/img1">
+        <file>res/back.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>style.qss</file>
+        <file>res/stock.gif</file>
+        <file>res/back_1.gif</file>
+        <file>res/login_ui.png</file>
+        <file>res/login_ui1.png</file>
+        <file>res/login_ui2.png</file>
+        <file>res/login_ui3.png</file>
+        <file>res/LOGINMID.png</file>
+        <file>res/logo.png</file>
+    </qresource>
+</RCC>

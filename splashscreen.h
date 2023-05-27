@@ -2,6 +2,7 @@
 #define SPLASHSCREEN_H
 
 #include <QWidget>
+#include "mainwindow.h"
 
 namespace Ui {
 class splashScreen;
@@ -17,6 +18,16 @@ public:
 
 private:
     Ui::splashScreen *ui;
+    MainWindow* mainWindow;
+    QNetworkAccessManager *networkManager;
+    void validate();
+
+
+private slots:
+    void checkAnimationEnd();
+
+    void on_pushButton_clicked();
 };
+void buttonClicked();
 
 #endif // SPLASHSCREEN_H

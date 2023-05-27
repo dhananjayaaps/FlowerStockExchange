@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "userdata.h"
+#include "login.h"
 #include <QFileDialog>
 #include <QHBoxLayout>
 #include <QDialog>
@@ -10,6 +12,12 @@
 #include <QDebug>
 #include <QTableWidgetItem>
 #include<iostream>
+#include <QUrlQuery>
+
+
+
+
+QString flower ="Rose";
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -17,12 +25,24 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->error_label->hide();
+    setWindowTitle("Flower Stock Exchange");
+    QIcon icon(":/res/logo.png");
+    setWindowIcon(icon);
+
+   ui->price_edit->setPlaceholderText("Price");
+   ui->client_id->setPlaceholderText("Client Id");
 
     networkManager = new QNetworkAccessManager(this);
 
-    ui->tableWidget->setColumnCount(8); // Set the column count
-    QStringList headerLabels = { "Order ID", "Client ID", "Instrument", "Side", "Status", "Quantity", "Price", "Transaction Time" };
+
+    connect(ui->actionLog_Out, &QAction::triggered, this, &MainWindow::onActionLog_OutClicked);
+
+    ui->tableWidget->setColumnCount(9);
+    ui->table_prev->setColumnCount(9);// Set the column count
+    QStringList headerLabels = { "Order ID", "Client ID", "Instrument", "Side", "Status", "Quantity", "Price", "Transaction Time","Reason" };
     ui->tableWidget->setHorizontalHeaderLabels(headerLabels);
+    ui->table_prev->setHorizontalHeaderLabels(headerLabels);
 
     ui->tableWidget->horizontalHeader()->resizeSection(0, 80);
     ui->tableWidget->horizontalHeader()->resizeSection(1, 100);
@@ -32,9 +52,25 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tableWidget->horizontalHeader()->resizeSection(5, 70);
     ui->tableWidget->horizontalHeader()->resizeSection(6, 100);
     ui->tableWidget->horizontalHeader()->resizeSection(7, 200);
-
-
+    ui->tableWidget->horizontalHeader()->resizeSection(8, 100);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    ui->table_prev->horizontalHeader()->resizeSection(0, 80);
+    ui->table_prev->horizontalHeader()->resizeSection(1, 100);
+    ui->table_prev->horizontalHeader()->resizeSection(2, 90);
+    ui->table_prev->horizontalHeader()->resizeSection(3, 80);
+    ui->table_prev->horizontalHeader()->resizeSection(4, 70);
+    ui->table_prev->horizontalHeader()->resizeSection(5, 70);
+    ui->table_prev->horizontalHeader()->resizeSection(6, 100);
+    ui->table_prev->horizontalHeader()->resizeSection(7, 200);
+    ui->table_prev->horizontalHeader()->resizeSection(8, 100);
+    ui->table_prev->horizontalHeader()->setSectionResizeMode(QHeaderView::Fixed);
+
+    qDebug()<<userId()<<token();
+
+
+
+
 
 }
 
@@ -43,13 +79,16 @@ MainWindow::~MainWindow()
     delete ui;
 }
 QString OpenfilePath ;
+
 void MainWindow::on_pushButton_clicked()
 {
     OpenfilePath = QFileDialog::getOpenFileName(this, "Open Csv File", "", "CSV Files (*.csv)");
     if (!OpenfilePath.isEmpty()) {
         ui->plainTextEdit->setPlainText(OpenfilePath);
+        ui->pushButton->setText("Change File");
     }
 }
+
 
 
 void MainWindow::on_submit_clicked()
@@ -60,8 +99,12 @@ void MainWindow::on_submit_clicked()
         QUrl apiUrl(url);
         QNetworkRequest request(apiUrl);
 
-        request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-        request.setHeader(QNetworkRequest::ContentLengthHeader, QByteArray::number(84));
+        request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/x-www-form-urlencoded"));
+        request.setRawHeader("ID", QByteArray::number(userId()));
+        request.setRawHeader("Token", token().toUtf8());
+
+
+
 
         ui->tableWidget->clearContents();
         ui->tableWidget->setRowCount(0);
@@ -81,24 +124,25 @@ void MainWindow::on_submit_clicked()
         QStringList data = line.split(',');
 
         // Create the payload JSON object
-        QJsonObject payload;
-        payload["Client_ID"] = data.value(0);
-        payload["Instrument"] = data.value(1);
-        payload["Side"] = data.value(2);
-        payload["Quantity"] = data.value(3);
-        payload["Price"] = data.value(4);
+        QUrlQuery postData;
+        postData.addQueryItem("Client_ID", data.value(0));
+        postData.addQueryItem("Instrument", data.value(1));
+        postData.addQueryItem("Side", data.value(2));
+        postData.addQueryItem("Quantity", data.value(3));
+        postData.addQueryItem("Price", data.value(4));
 
-        // Convert the payload to JSON data
-        QJsonDocument payloadDoc(payload);
-        QByteArray payloadData = payloadDoc.toJson(QJsonDocument::Compact);
+        QByteArray payloadData = postData.toString(QUrl::FullyEncoded).toUtf8();
+//        qDebug() << "input: " << payloadData;
 
-        // Make the API request
+
+
         QNetworkReply* reply = networkManager->post(request, payloadData);
 
-        // Connect the finished signal to handle the response
+
         connect(reply, &QNetworkReply::finished, [=]() {
             if (reply->error() == QNetworkReply::NoError) {
                 QByteArray response = reply->readAll();
+//                 qDebug() << "responce: " << response;
 
                 // Process the response and append the data to the table
                 QString cleanedResponse = response;
@@ -136,143 +180,169 @@ void MainWindow::on_submit_clicked()
 
 
 
-//void MainWindow::on_submit_clicked()
-//{
-////
 
-//    //api code lines
-//    QString url = "http://20.198.103.92:8123/api/order/new";
-//    QUrl apiUrl(url);
-//    QNetworkRequest request(apiUrl);
+void MainWindow::onActionLog_OutClicked()
+{
+    StoreData("0",0);
+    this->hide();
+    login * loginwindow=new login();
+    loginwindow->show();
 
-//    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-//    request.setHeader(QNetworkRequest::ContentLengthHeader, QByteArray::number(84));
-
-//    ui->tableWidget->clearContents();
-//    ui->tableWidget->setRowCount(0);
+    qDebug() << "logout";
+}
 
 
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
 
-//    QFile file(OpenfilePath);
-//    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-//        QTextStream in(&file);
-//        QString headerLine = in.readLine();
+   if(index==1){
+       ui->table_prev->clearContents();
+       ui->table_prev->setRowCount(0);
 
-//        while (!in.atEnd()) {
-//            QString line = in.readLine();
-//            QStringList data = line.split(',');
+       QString url = "http://lseg.sinethd.com:8080/api/order/get";
+       QUrl apiUrl(url);
+       QNetworkRequest request(apiUrl);
 
-//            QJsonObject payload;
-//                payload["Client_ID"] = "aa18";
-//                payload["Instrument"] = "Rose";
-//                payload["Side"] = "2";
-//                payload["Quantity"] = "60";
-//                payload["Price"] = "75";
-//                QJsonDocument payloadDoc(payload);
-//                QByteArray payloadData = payloadDoc.toJson();
+       request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/x-www-form-urlencoded"));
+       request.setRawHeader("ID", QByteArray::number(userId()));
+       request.setRawHeader("Token", token().toUtf8());
 
-////                requesting
-//                QNetworkReply* reply = networkManager->post(request, payloadData);
+       QNetworkReply* reply = networkManager->get(request);
 
+       // Connect the finished signal to a lambda function or a slot
+       connect(reply, &QNetworkReply::finished, this, [=]() {
+           if (reply->error() == QNetworkReply::NoError) {
+               // Read the response data
+               QByteArray responseData = reply->readAll();
 
-//                connect(reply, &QNetworkReply::finished, [=]() {
-//                        if (reply->error() == QNetworkReply::NoError) {
-//                            QByteArray response = reply->readAll();
+               QString cleanedResponse = responseData;
+               cleanedResponse.remove("[");
+               cleanedResponse.remove("]");
+               QStringList lines = cleanedResponse.split("\",\"");
 
-//                            QString cleanedResponse = response;
-//                            std::cout<<"cleanedResponse";
-//                            cleanedResponse.remove("[");
-//                            cleanedResponse.remove("]");
-//                            QStringList lines = cleanedResponse.split("\",\"");
-//                            ui->tableWidget->setRowCount(lines.size());
+               // Append the response data to the table
+               int rowCount = ui->table_prev->rowCount();
+               ui->table_prev->setRowCount(rowCount + lines.size());
 
+               for (int i = 0; i < lines.size(); ++i) {
+                   QString line = lines.at(i);
+                   line.remove("\"");
+                   QStringList responseData = line.split(',');
 
-//                            for (int i = 0; i < lines.size(); ++i) {
-//                                QString line = lines.at(i);
-//                                line.remove("\"");
-//                                QStringList data = line.split(',');
-
-//                                for (int j = 0; j < data.size(); ++j) {
-//                                    QTableWidgetItem* item = new QTableWidgetItem(data.at(j));
-//                                    item->setTextAlignment(Qt::AlignCenter);
-//                                    ui->tableWidget->setItem(i, j, item);
-//                                }
-//                            }
-
+                   for (int j = 0; j < responseData.size(); ++j) {
+                       QTableWidgetItem* item = new QTableWidgetItem(responseData.at(j));
+                       item->setTextAlignment(Qt::AlignCenter);
+                       ui->table_prev->setItem(rowCount + i, j, item);
+                   }
+               }
+           }
+       });
 
 
+   }
 
-//                        } else {
-//                            qDebug() << "Error: " << reply->errorString();
-//                        }
-
-//                        reply->deleteLater();
-//                    });
+}
 
 
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+
+}
 
 
-
-//        }
-
-//        file.close();
-//    } else {
-//        qDebug() << "Failed to open file:" << file.errorString();
-//    }
+void MainWindow::on_comboBox_currentTextChanged(const QString &arg1)
+{
+    flower=arg1;
+}
 
 
+void MainWindow::on_pushButton_2_clicked()
+{
+ getDataandSet("2");
+}
 
 
+void MainWindow::on_buy_clicked()
+{
+getDataandSet("1");
+}
 
 
-//}
+void MainWindow::getDataandSet(QString side)
+{
 
+    QString url = "http://20.198.103.92:8080/api/order/new";
+    QUrl apiUrl(url);
+    QNetworkRequest request(apiUrl);
 
-//while start point
-//    QJsonObject payload;
-//    payload["Client_ID"] = "aa18";
-//    payload["Instrument"] = "Rose";
-//    payload["Side"] = "2";
-//    payload["Quantity"] = "60";
-//    payload["Price"] = "75";
-//    QJsonDocument payloadDoc(payload);
-//    QByteArray payloadData = payloadDoc.toJson();
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant("application/x-www-form-urlencoded"));
+    request.setRawHeader("ID", QByteArray::number(userId()));
+    request.setRawHeader("Token", token().toUtf8());
 
-    //requesting
-//    QNetworkReply* reply = networkManager->post(request, payloadData);
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(0);
 
-
-//    connect(reply, &QNetworkReply::finished, [=]() {
-//            if (reply->error() == QNetworkReply::NoError) {
-//                QByteArray response = reply->readAll();
-
-//                QString cleanedResponse = response;
-//                cleanedResponse.remove("[");
-//                cleanedResponse.remove("]");
-//                QStringList lines = cleanedResponse.split("\",\"");
-//                ui->tableWidget->setRowCount(lines.size());
-
-
-//                for (int i = 0; i < lines.size(); ++i) {
-//                    QString line = lines.at(i);
-//                    line.remove("\"");
-//                    QStringList data = line.split(',');
-
-//                    for (int j = 0; j < data.size(); ++j) {
-//                        QTableWidgetItem* item = new QTableWidgetItem(data.at(j));
-//                        item->setTextAlignment(Qt::AlignCenter);
-//                        ui->tableWidget->setItem(i, j, item);
-//                    }
-//                }
+    QString cId=ui->client_id->text();
+    QString quantity= ui->quantity->text();
+    QString price = ui->price_edit->text();
 
 
 
+    QUrlQuery postData;
+    postData.addQueryItem("Client_ID", cId);
+    postData.addQueryItem("Instrument", flower);
+    postData.addQueryItem("Side", side);
+    postData.addQueryItem("Quantity", quantity);
+    postData.addQueryItem("Price", price);
 
-//            } else {
-//                qDebug() << "Error: " << reply->errorString();
-//            }
+    QByteArray payloadData = postData.toString(QUrl::FullyEncoded).toUtf8();
+        qDebug() << "input: " << payloadData;
 
-//            reply->deleteLater();
-//        });
 
-//}
+
+    QNetworkReply* reply = networkManager->post(request, payloadData);
+
+
+    connect(reply, &QNetworkReply::finished, [=]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            QByteArray response = reply->readAll();
+//                 qDebug() << "responce: " << response;
+
+            // Process the response and append the data to the table
+            QString cleanedResponse = response;
+            cleanedResponse.remove("[");
+            cleanedResponse.remove("]");
+            QStringList lines = cleanedResponse.split("\",\"");
+
+            // Append the response data to the table
+            int rowCount = ui->tableWidget->rowCount();
+            ui->tableWidget->setRowCount(rowCount + lines.size());
+
+            for (int i = 0; i < lines.size(); ++i) {
+                QString line = lines.at(i);
+                line.remove("\"");
+                QStringList responseData = line.split(',');
+
+                for (int j = 0; j < responseData.size(); ++j) {
+                    QTableWidgetItem* item = new QTableWidgetItem(responseData.at(j));
+                    item->setTextAlignment(Qt::AlignCenter);
+                    ui->tableWidget->setItem(rowCount + i, j, item);
+                }
+            }
+        } else {
+            qDebug() << "Error: " << reply->errorString();
+        }
+
+        reply->deleteLater();
+    });
+
+}
+
+void MainWindow::on_quantity_valueChanged(int arg1)
+{
+    ui->error_label->hide();
+    if(arg1%10!=0){
+        ui->error_label->show();
+    }
+}
+
