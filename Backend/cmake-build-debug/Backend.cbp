@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Backend"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Backend">
+				<Option output="/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Backend" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/path/to/mysqlcppconn/include"/>
+					<Add directory="/usr/include/c++/12"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/12"/>
+					<Add directory="/usr/include/c++/12/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/12/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 Backend"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Backend/fast">
+				<Option output="/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Backend" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/path/to/mysqlcppconn/include"/>
+					<Add directory="/usr/include/c++/12"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/12"/>
+					<Add directory="/usr/include/c++/12/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/12/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 Backend/fast"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j12 -f &quot;/home/sineth/CLionProjects/FlowerStockExchange/Backend/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/Cache.cpp">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/Cache.h">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/HandlerLogic.cpp">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/HandlerLogic.h">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/RedBlackTree.cpp">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/RedBlackTree.h">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/ValidateOrder.cpp">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/ValidateOrder.h">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/count.h">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/getHistory.cpp">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/getHistory.h">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/handleOrder.cpp">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/handleOrder.h">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/main.cpp">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/order.cpp">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/order.csv">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/order.h">
+			<Option target="Backend"/>
+		</Unit>
+		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

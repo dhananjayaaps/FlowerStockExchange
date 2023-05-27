@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/Backend.dir/main.cpp.o CMakeFiles/Backend.dir/ValidateOrder.cpp.o CMakeFiles/Backend.dir/order.cpp.o CMakeFiles/Backend.dir/BuyHandler.cpp.o CMakeFiles/Backend.dir/RedBlackTree.cpp.o CMakeFiles/Backend.dir/Cache.cpp.o -o Backend 

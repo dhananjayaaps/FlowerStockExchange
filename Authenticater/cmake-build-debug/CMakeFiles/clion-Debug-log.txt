@@ -1,0 +1,17 @@
+/home/sineth/Downloads/clion-2023.1.2/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/sineth/Downloads/clion-2023.1.2/bin/ninja/linux/x64/ninja -G Ninja -S /home/sineth/CLionProjects/FlowerStockExchange/Authenticater -B /home/sineth/CLionProjects/FlowerStockExchange/Authenticater/cmake-build-debug
+-- The C compiler identification is GNU 12.2.0
+-- The CXX compiler identification is GNU 12.2.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.5")  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/sineth/CLionProjects/FlowerStockExchange/Authenticater/cmake-build-debug
