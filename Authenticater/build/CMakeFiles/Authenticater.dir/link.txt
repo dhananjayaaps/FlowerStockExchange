@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/Authenticater.dir/main.cpp.o CMakeFiles/Authenticater.dir/signup.cpp.o CMakeFiles/Authenticater.dir/login.cpp.o CMakeFiles/Authenticater.dir/utils.cpp.o CMakeFiles/Authenticater.dir/tokenValidator.cpp.o -o Authenticater  /usr/lib/x86_64-linux-gnu/libcrypto.so -lmysqlcppconn -lserved -pthread 

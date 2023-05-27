@@ -1,9 +1,0 @@
-# ninja log v5
-1	905	1684738109091127812	CMakeFiles/Authenticater.dir/utils.cpp.o	37b22923dd079b04
-0	1940	1684738110122961848	CMakeFiles/Authenticater.dir/main.cpp.o	9c2a19d4afb7f9fb
-1	2148	1684738110330928467	CMakeFiles/Authenticater.dir/signup.cpp.o	b26629c8cc7acc3b
-1	2210	1684738110394918196	CMakeFiles/Authenticater.dir/tokenValidator.cpp.o	6d4a99f70c8f8800
-1	2362	1684738110542894444	CMakeFiles/Authenticater.dir/login.cpp.o	182300809042138a
-2362	2490	1684738110674873260	Authenticater	394c780d7702de12
-2	1805	1684738702702369120	CMakeFiles/Authenticater.dir/main.cpp.o	9c2a19d4afb7f9fb
-1805	1934	1684738702834359285	Authenticater	394c780d7702de12
