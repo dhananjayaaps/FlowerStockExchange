@@ -3,9 +3,9 @@
 #include <served/served.hpp>
 #include <string>
 #include "HandlerLogic.h"
-#include "count.h"
 #include "handleOrder.h"
 #include "getHistory.h"
+#include "Cache.h"
 
 using namespace sdds;
 
@@ -13,10 +13,9 @@ int main() {
     std::cout << "Welcome to the flower Stock exchange"<< std::endl;
     pushDummiestToBuy();
     pushDummiestToSell();
-    orderID = 0;
 
-    //std::string public_ip = "127.0.0.1";
-    std::string public_ip = "10.0.0.4";
+    std::string public_ip = "127.0.0.1";
+    //std::string public_ip = "10.0.0.4";
     if (public_ip.empty()) {
         std::cerr << "Failed to retrieve public IP address." << std::endl;
         return EXIT_FAILURE;

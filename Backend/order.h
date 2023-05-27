@@ -4,7 +4,6 @@
 #include <iostream>
 #include <cstring>
 #include <vector>
-#include "count.h"
 
 namespace sdds{
 

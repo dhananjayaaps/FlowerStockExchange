@@ -108,9 +108,6 @@
 		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/ValidateOrder.h">
 			<Option target="Backend"/>
 		</Unit>
-		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/count.h">
-			<Option target="Backend"/>
-		</Unit>
 		<Unit filename="/home/sineth/CLionProjects/FlowerStockExchange/Backend/getHistory.cpp">
 			<Option target="Backend"/>
 		</Unit>

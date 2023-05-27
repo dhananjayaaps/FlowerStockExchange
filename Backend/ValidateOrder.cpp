@@ -3,15 +3,17 @@
 #include <algorithm>
 #include <regex>
 #include <chrono>
-#include <iomanip>
 #include "HandlerLogic.h"
+#include "Cache.h"
 
 namespace sdds{
 
     void raiseError(const std::string &Client_ID, const std::string &Instrument, const std::string &side,
                           const std::string &quantity, const std::string &price, const std::exception& e, std::vector<std::string> &resp, const std::string& userId) {
         std::stringstream os;
-        os << ++orderID << ",";
+        incrementCount();
+
+        os << getCount()<< ",";
         os<<Client_ID<<",";
         os<<Instrument<<",";
         os<<side<<",";
@@ -24,12 +26,7 @@ namespace sdds{
         auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
         std::time_t now_c = std::chrono::system_clock::to_time_t(now);
 
-        // Convert to local time
-        std::tm local_time = *std::localtime(&now_c);
-
-        // Format time as string and append to output stream
-        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
-        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        os << getTime();
         os << ",";
         os << e.what();
         resp.push_back(os.str());
@@ -63,6 +60,8 @@ namespace sdds{
     // process each input from user
     void processOrder(const std::string& clientOrderID,const std::string& instrument,const std::string& side,const std::string& quantity,const std::string& price,std::vector<std::string>& data, const std::string& userId){
 
+
+    setTime();
 
     int m_side, m_quantity;
         double m_price;

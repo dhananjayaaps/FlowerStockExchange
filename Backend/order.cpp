@@ -1,9 +1,7 @@
 #include "order.h"
-
 #include <utility>
-#include <chrono>
-#include <iomanip>
 #include <sstream>
+#include "Cache.h"
 
 namespace sdds{
 
@@ -17,7 +15,8 @@ namespace sdds{
     }
 
     Order::Order(std::string id, int instrument, int side, int quantity, double price, int uid) {
-        m_orderId = ++orderID;
+        incrementCount();
+        m_orderId = getCount();
         m_clientOrderID = std::move(id);
         m_instrument = instrument;
         m_side = side;
@@ -41,16 +40,7 @@ namespace sdds{
         os << price << ",";
 
         // Get current system time with milliseconds
-        auto now = std::chrono::system_clock::now();
-        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
-        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
-
-        // Convert to local time
-        std::tm local_time = *std::localtime(&now_c);
-
-        // Format time as string and append to output stream
-        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
-        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        os << getTime();
         os<<",";
         resp.push_back(os.str());
     }
@@ -67,16 +57,7 @@ namespace sdds{
         os<<m_price <<",";
 
         // Get current system time with milliseconds
-        auto now = std::chrono::system_clock::now();
-        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
-        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
-
-        // Convert to local time
-        std::tm local_time = *std::localtime(&now_c);
-
-        // Format time as string and append to output stream
-        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
-        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        os << getTime();
         os<<",";
         resp.push_back(os.str());
     }
@@ -93,16 +74,7 @@ namespace sdds{
         os<<price << ",";
 
         // Get current system time with milliseconds
-        auto now = std::chrono::system_clock::now();
-        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
-        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
-
-        // Convert to local time
-        std::tm local_time = *std::localtime(&now_c);
-
-        // Format time as string and append to output stream
-        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
-        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        os << getTime();
         os<<",";
         resp.push_back(os.str());
     }
