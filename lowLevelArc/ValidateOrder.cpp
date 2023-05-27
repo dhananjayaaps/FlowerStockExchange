@@ -1,8 +1,6 @@
 #include "ValidateOrder.h"
 #include <iostream>
 #include <algorithm>
-#include <regex>
-#include <chrono>
 #include <iomanip>
 #include "BuyHandler.h"
 #include "Cache.h"
@@ -12,7 +10,8 @@ namespace sdds{
     void raiseError(const std::string &Client_ID, const std::string &Instrument, const std::string &side,
                     const std::string &quantity, const std::string &price, const std::exception& e, std::ostream &os) {
 
-        os << ++orderId << ",";
+        incrementCount();
+        os << getCount() << ",";
         os<<Client_ID<<",";
         os<<Instrument<<",";
         os<<side<<",";
@@ -21,16 +20,7 @@ namespace sdds{
         os<<price <<",";
 
         // Get current system time with milliseconds
-        auto now = std::chrono::system_clock::now();
-        auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()) % 1000;
-        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
-
-        // Convert to local time
-        std::tm local_time = *std::localtime(&now_c);
-
-        // Format time as string and append to output stream
-        os << std::put_time(&local_time, "%Y-%m-%d %H:%M:%S");
-        os << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        os << getTime();
         os << ",";
         os << e.what();
         os << std::endl;
@@ -105,7 +95,7 @@ namespace sdds{
                     }
 
                 default:
-                    throw std::invalid_argument("Invalid instrument.");
+                    throw std::invalid_argument("Invalid instrument");
             }
 
             if (clientOrderID.empty()){

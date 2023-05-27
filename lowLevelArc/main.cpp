@@ -17,10 +17,7 @@ int main() {
     std::cout << "Welcome to the flower Stock exchange"<< std::endl;
     std::ifstream file("order.csv");
 
-    pushDummiestToBuy();
-    pushDummiestToSell();
-
-    orderId = 0;
+    pushDummies();
 
     std::string line;
 
@@ -29,14 +26,14 @@ int main() {
 
     std::string clientOrderID, instrument , side, quantity, price;
 
-    std::ofstream outfile("execution_rep.txt", std::ios::trunc);
+    std::ofstream outfile("execution_rep.csv", std::ios::trunc);
     if (outfile.is_open()) {
         // Add a header to the file
-        outfile << "Cl. Ord. Id";
-        outfile << "Instrument";
-        outfile << "Side";
-        outfile << "Exec. Status";
-        outfile << "Quantity";
+        outfile << "Cl.Ord.Id" << ",";
+        outfile << "Instrument" << ",";
+        outfile << "Side" << ",";
+        outfile << "Exec. Status" << ",";
+        outfile << "Quantity" << ",";
         outfile << "Price";
         outfile << std::endl;
 
@@ -44,11 +41,14 @@ int main() {
         std::cerr << "Unable to open file." << std::endl;
     }
 
-    std::ofstream outfile2("execution_rep.txt", std::ios::app);
+    // Do the process and write the execution_rep.csv
+
+    std::ofstream outfile2("execution_rep.csv", std::ios::app);
     if (outfile2.is_open()) {
     // Read each line of the CSV file
         while (std::getline(file, line)) {
             std::stringstream ss(line);
+            setTime();
 
             // Parse each value in the line
             std::getline(ss, clientOrderID, ',');
@@ -65,7 +65,6 @@ int main() {
 
             // Write the contents of the stringstream to the file
             outfile << os.str();
-            //std::cout << "Successfully wrote to file." << std::endl;
 
         }
         outfile.close();
@@ -79,6 +78,7 @@ int main() {
 
     // Print the time difference
     std::cout << "Time difference: " << time_diff.count() << " milliseconds" << std::endl;
+
 
     return 0;
 }

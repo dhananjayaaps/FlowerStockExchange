@@ -15,8 +15,8 @@ int main() {
     pushDummiestToSell();
     orderID = 0;
 
-    std::string public_ip = "127.0.0.1";
-    //std::string public_ip = "10.0.0.4";
+    //std::string public_ip = "127.0.0.1";
+    std::string public_ip = "10.0.0.4";
     if (public_ip.empty()) {
         std::cerr << "Failed to retrieve public IP address." << std::endl;
         return EXIT_FAILURE;

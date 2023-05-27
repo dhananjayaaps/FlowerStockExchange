@@ -11,8 +11,6 @@ namespace sdds{
     static RedBlackTree SellingDataTree[TREE_ARRAY_SIZE];
     static RedBlackTree BuyingDataTree[TREE_ARRAY_SIZE];
 
-    void pushDummiestToTree();
-
 }
 
 #endif //BACKEND_ALLTREES_H

@@ -11,7 +11,8 @@ namespace sdds{
         char instrumentName[5][9] = {"Rose", "Lavender" , "Lotus" , "Tulip" ,"Orchid" };
 
         Order();
-
+        int m_orderId;
+        std::string m_clientOrderID{};
         int m_instrument{};
         int m_side{};
         int m_quantity{};
@@ -19,9 +20,6 @@ namespace sdds{
 
     public:
         Order(std::string id, int instrument, int side, int quantity, double price);
-
-        std::string m_clientOrderID{};
-
         int getQuan();
         std::ostream& fill(std::ostream& os, double) const;
         std::ostream& newOrd(std::ostream& os) const;

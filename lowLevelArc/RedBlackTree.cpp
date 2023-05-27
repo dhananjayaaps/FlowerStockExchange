@@ -7,8 +7,6 @@ using namespace std;
 
 namespace sdds{
 
-
-
     void RedBlackTree::initializeNULLNode(NodePtr node, NodePtr parent) {
         node->data = 0;
         node->parent = parent;
@@ -126,6 +124,7 @@ namespace sdds{
         }
         v->parent = u->parent;
     }
+
 
     void RedBlackTree::deleteNodeHelper(NodePtr node, double key) {
         NodePtr z = TNULL;
@@ -347,14 +346,12 @@ namespace sdds{
 
     // Inserting a node
     std::queue<Order>* RedBlackTree::insert(double key) {
-
-
         NodePtr y = nullptr;
         NodePtr x = this->root;
 
         while (x != TNULL) {
-            if(x->data == key){
-                return &(x->orderQueue);
+            if (x->data == key) {
+                return x->orderQueue;
             }
             y = x;
             if (key < x->data) {
@@ -370,7 +367,7 @@ namespace sdds{
         node->left = TNULL;
         node->right = TNULL;
         node->color = 1;
-        node->orderQueue = *new std::queue<Order>();
+        node->orderQueue = new std::queue<Order>();
 
         node->parent = y;
         if (y == nullptr) {
@@ -383,16 +380,17 @@ namespace sdds{
 
         if (node->parent == nullptr) {
             node->color = 0;
-            return &(node->orderQueue);
+            return node->orderQueue;
         }
 
         if (node->parent->parent == nullptr) {
-            return &(node->orderQueue);
+            return node->orderQueue;
         }
 
         insertFix(node);
-        return &(node->orderQueue);
+        return node->orderQueue;
     }
+
 
     NodePtr RedBlackTree::getRoot() {
         return this->root;
@@ -408,6 +406,22 @@ namespace sdds{
         }
     }
 
+    RedBlackTree::~RedBlackTree() {
+        if (root) {
+            deleteSubtree(root);
+        }
+        delete TNULL;
+    }
+
+    void RedBlackTree::deleteSubtree(NodePtr node) {
+        if (node != TNULL) {
+            deleteSubtree(node->left);
+            deleteSubtree(node->right);
+            delete node->orderQueue; // Deallocate the orderQueue
+            delete node;
+        }
+    }
+
     Node * RedBlackTree::minValue() {
         return minimum(getRoot());
     }
@@ -415,4 +429,6 @@ namespace sdds{
     Node * RedBlackTree::maxValue() {
         return maximum(getRoot());
     }
+
+
 };

@@ -87,6 +87,8 @@ void getOrderHistory(served::response& res, const served::request& req)
             orderData += ",";
             orderData += resultSet->getString("side");
             orderData += ",";
+            orderData += resultSet->getString("status");
+            orderData += ",";
             orderData += resultSet->getString("quantity");
             orderData += ",";
             orderData += resultSet->getString("price");

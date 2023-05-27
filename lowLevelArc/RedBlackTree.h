@@ -14,7 +14,7 @@ namespace sdds {
         Node *left{};
         Node *right{};
         int color{};
-        std::queue<Order> orderQueue;
+        std::queue<Order> *orderQueue;
     };
 
     typedef Node *NodePtr;
@@ -56,6 +56,8 @@ namespace sdds {
         void inorder();
         void printTree();
         void deleteNode(double data);
+        ~RedBlackTree();
+        void deleteSubtree(NodePtr node);
     };
 
 }
