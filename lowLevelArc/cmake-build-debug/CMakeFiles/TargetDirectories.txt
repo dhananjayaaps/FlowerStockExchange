@@ -1,3 +1,0 @@
-D:/Desktop/FlowerStockExchange/lowLevelArc/cmake-build-debug/CMakeFiles/Backend.dir
-D:/Desktop/FlowerStockExchange/lowLevelArc/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/Desktop/FlowerStockExchange/lowLevelArc/cmake-build-debug/CMakeFiles/rebuild_cache.dir

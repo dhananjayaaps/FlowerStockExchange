@@ -67,6 +67,7 @@ namespace sdds {
                     if (buyMax->data < price){
                         break;
                     }
+                    availQuantity = buyMax->orderQueue.front().getQuan();
                 }
             }
             if(quantity){
@@ -139,6 +140,7 @@ namespace sdds {
                     if (SellMin->data > price){
                         break;
                     }
+                    availQuantity = SellMin->orderQueue.front().getQuan();
                 }
             }
             if(quantity){
