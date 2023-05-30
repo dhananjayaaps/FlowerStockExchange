@@ -1,11 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <vector>
 #include <chrono>
 
 #include "ValidateOrder.h"
-#include "AllTrees.h"
 #include "BuyHandler.h"
 #include "Cache.h"
 
@@ -34,7 +32,9 @@ int main() {
         outfile << "Side" << ",";
         outfile << "Exec. Status" << ",";
         outfile << "Quantity" << ",";
-        outfile << "Price";
+        outfile << "Price" << ",";
+        outfile << "time" << ",";
+        outfile << "reason" << ",";
         outfile << std::endl;
 
     } else {

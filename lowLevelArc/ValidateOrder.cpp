@@ -20,9 +20,9 @@ namespace sdds{
         os<<price <<",";
 
         // Get current system time with milliseconds
-        os << getTime();
-        os << ",";
         os << e.what();
+        os << ",";
+        os << getTime();
         os << std::endl;
     }
 

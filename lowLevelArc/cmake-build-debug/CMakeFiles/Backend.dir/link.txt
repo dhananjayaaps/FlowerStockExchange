@@ -1,1 +1,3 @@
-/usr/bin/c++ -g CMakeFiles/Backend.dir/main.cpp.o CMakeFiles/Backend.dir/ValidateOrder.cpp.o CMakeFiles/Backend.dir/order.cpp.o CMakeFiles/Backend.dir/BuyHandler.cpp.o CMakeFiles/Backend.dir/RedBlackTree.cpp.o CMakeFiles/Backend.dir/Cache.cpp.o -o Backend 
+"C:\Program Files\JetBrains\CLion 2023.1.2\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\Backend.dir/objects.a
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\ar.exe qc CMakeFiles\Backend.dir/objects.a @CMakeFiles\Backend.dir\objects1
+C:\PROGRA~1\JETBRA~1\CLION2~1.2\bin\mingw\bin\G__~1.EXE -g -Wl,--whole-archive CMakeFiles\Backend.dir/objects.a -Wl,--no-whole-archive -o Backend.exe -Wl,--out-implib,libBackend.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Backend.dir\linkLibs.rsp

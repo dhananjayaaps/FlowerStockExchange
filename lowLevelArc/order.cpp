@@ -36,8 +36,8 @@ namespace sdds{
         os<<"Fill"<<",";
         os<<m_quantity<<",";
         os<<price <<",";
-        os << getTime();
         os << ",";
+        os << getTime();
 
         return os;
     }
@@ -50,8 +50,8 @@ namespace sdds{
         os<<"New"<<",";
         os<<m_quantity<<",";
         os<<m_price <<",";
-        os << getTime();
         os << ",";
+        os << getTime();
         return os;
     }
 
@@ -64,8 +64,8 @@ namespace sdds{
         os<<"pfill"<<",";
         os<<quantityRm<<",";
         os<<price << ",";
-        os << getTime();
         os << ",";
+        os << getTime();
         return os;;
     }
 

@@ -40,6 +40,7 @@ namespace sdds {
             int availQuantity = buyMax->orderQueue->front().getQuan();
 
             while (true){
+                buyMax = BuyingDataTree[instrument].maxValue();
 
                 // getting the maximum buying request
                 if(availQuantity == quantity){
@@ -69,13 +70,17 @@ namespace sdds {
                     buyMax->orderQueue->front().fill(os, buyMax->data);
                     buyMax->orderQueue->pop();
                     os << std::endl;
+
                     if(buyMax->orderQueue->empty()){
                         BuyingDataTree[instrument].deleteNode(buyMax->data);
                     }
                     buyMax = BuyingDataTree[instrument].maxValue();
+
                     if (buyMax->data < price){
                         break;
                     }
+                    availQuantity = buyMax->orderQueue->front().getQuan();
+
                 }
             }
             if(quantity){
@@ -105,8 +110,6 @@ namespace sdds {
             int availQuantity = SellMin->orderQueue->front().getQuan();
 
             while (true){
-
-                // getting the maximum price buying request
 
                 if(availQuantity == quantity){
                     newOrder.fill(os, SellMin->data);
@@ -142,6 +145,7 @@ namespace sdds {
                     if (SellMin->data > price){
                         break;
                     }
+                    availQuantity = SellMin->orderQueue->front().getQuan();
                 }
             }
             if(quantity){
